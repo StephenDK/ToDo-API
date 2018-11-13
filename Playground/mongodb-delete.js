@@ -11,19 +11,19 @@ MongoClient.connect('mongodb://localhost/ToDoDB',
     const db = client.db('ToDoDB');
 
     // deleteMany
-    deletes all documents with matching criteria
+    // deletes all documents with matching criteria
     db.collection('Todos').deleteMany({text: 'Jump'}).then((result) => {
         console.log(result);
     });
 
     // deleteOne
-    only deletes one document with passed in criteria
+    // only deletes one document with passed in criteria
     db.collection('Todos').deleteOne({ text: 'Love' }).then((res) => {
         console.log(res);
     });
 
     // findOneAndDelete
-    Uses the ObjectID to find and delete
+    // Uses the ObjectID to find and delete
     db.collection('Todos').findOneAndDelete({
         _id: ObjectID('5bea09f0d57b61fbfb729bed')
     }).then((res) => {
