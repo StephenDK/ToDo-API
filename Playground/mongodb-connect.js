@@ -14,7 +14,7 @@ MongoClient.connect('mongodb://localhost/ToDoDB',
     console.log('Connected to MongoDB server');
     const db = client.db('ToDoDB');
 
-    Insert record in to collection
+    // Insert record in to collection
     db.collection('Todos').insertOne({
         text: 'Play video games',
         completed: false
