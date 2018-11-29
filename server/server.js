@@ -21,7 +21,7 @@ app.post('/todos', (req, res) => {
     todo.save().then((data) => {
         console.log('ToDo Saved..');
     }, (e) => {
-        console.log(e);
+        // console.log(e);
         res.status(400).send(e);
         console.log(e.errors.text.message)
        
@@ -64,6 +64,7 @@ app.listen(3000, () => {
     console.log('Started on Port 3000');
 })
 
+module.exports = {app};
 
 // var newUser = new USER({
 //     userName: 'Stephen Klein',
