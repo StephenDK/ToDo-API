@@ -60,6 +60,25 @@ app.post('/newuser', (req, res) => {
     })
 })
 
+
+// ROUTE TO GET ALL THE TODOS
+app.get('/alltodos', (req, res) => {
+    Todo.find().then((todos) => {
+        // console.log(todos);
+        res.send({todos});
+    }, (e) => {
+        // If there is an error
+        res.status(400).send(e);
+        console.log(e);
+    })
+
+   
+    
+})
+
+
+
+
 app.listen(3000, () => {
     console.log('Started on Port 3000');
 })
