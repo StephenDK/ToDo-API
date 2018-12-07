@@ -70,18 +70,15 @@ app.get('/alltodos', (req, res) => {
         // If there is an error
         res.status(400).send(e);
         console.log(e);
-    })
-
-   
-    
-})
+    });
+});
 
 
 
 
 app.listen(3000, () => {
     console.log('Started on Port 3000');
-})
+});
 
 module.exports = {app};
 
