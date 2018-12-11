@@ -82,33 +82,54 @@ app.get('/alltodos', (req, res) => {
 // GET /todos/12434342 <-- make this dynamic
 // Use whatever is passed in and use
 // it to make a query to todos db
-app.get('/alltodos/:id', (req, res) => {
-    // req.params
-    // res.send(req.params);
+
+// My code 
+// app.get('/todos/:id', (req, res) => {
+//     // req.params
+//     // res.send(req.params);
+//     var id = req.params.id;
+
+//     // Validate mongo id using isValid
+//     if (!ObjectID.isValid(id)) {
+//         // if not valid send error
+//         return res.status(404).send({});
+//     } else {
+//         // If valid
+//         // find by id in the database
+//         Todo.findById({
+//             _id: id
+//         }).then((todo) => {
+//             // If no users found send error
+//             if(!todo) {
+//                 return res.status(404).send({});
+//             } else {
+//                 res.send({todo});
+//             }
+//         }).catch((e) => {
+//             // if DB error send back error
+//             res.status(400).send(e);
+//         })
+//     }
+// });
+
+app.get('/todos/:id', (req, res) => {
     var id = req.params.id;
 
-    // Validate mongo id using isValid
-    if (!ObjectID.isValid(id)) {
-        // if not valid send error
-        res.status(404).send({});
-    } else {
-        // If valid
-        // find by id in the database
-        USER.findById({
-            _id: id
-        }).then((todo) => {
-            // If no users found send error
-            if(!todo) {
-                res.status(400).send({});
-            } else {
-                res.send({todo});
-            }
-        }).catch((e) => {
-            // if DB error send back error
-            res.status(400).send(e);
-        })
+    if(!ObjectID.isValid(id)) {
+        return res.status(404).send();
     }
+
+    Todo.findById(id).then((todo) => {
+        if(!todo) {
+            return res.status(404).send();
+        }
+
+        res.send({todo})
+    }).catch((e) => {
+        res.status(400).send();
+    });
 });
+
 
 
 
