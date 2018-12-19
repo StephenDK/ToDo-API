@@ -12,6 +12,13 @@ var app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+
+
+
+
+
+    
 
 app.post('/todos', (req, res) => {
     console.log(req.body);
@@ -65,6 +72,7 @@ app.post('/newuser', (req, res) => {
 
 // ROUTE TO GET ALL THE TODOS
 app.get('/alltodos', (req, res) => {
+    // console.log('I have the best wife');
     Todo.find().then((todos) => {
         // console.log(todos);
         res.send({todos});
@@ -114,7 +122,7 @@ app.get('/alltodos', (req, res) => {
 // });
 
 app.get('/todos/:id', (req, res) => {
-    var id = req.params.id;
+    var id = req.params.id
 
     if(!ObjectID.isValid(id)) {
         return res.status(404).send();
