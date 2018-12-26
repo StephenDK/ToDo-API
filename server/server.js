@@ -1,4 +1,5 @@
 
+
 const express = require('express');
 const bodyParser = require('body-parser');
 // const mongoose = require('mongoose');
@@ -134,12 +135,50 @@ app.get('/todos/:id', (req, res) => {
         }
 
         res.send({todo})
-    }).catch((e) => {
+    }).catch((e) => {  
         res.status(400).send();
     });
 });
 
 
+// Route to delete a todo
+app.delete('/tododelete/:id', (req, res) => {
+    // console.log(req);
+    let id = req.params.id;
+    // console.log(id);
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send();
+    }
+    // db call
+    Todo.findOneAndRemove({_id: id}).then((todo) => {
+        if (!todo) {
+            return res.status(404).send();
+        }
+        // console.log('Todo deleted');
+        // console.log(todo);
+        res.send({todo});
+    }).catch((e) => {
+        // console.log(e);
+        res.status(400).send();
+    })
+});
+
+// PATCH route to update a todo
+app.patch('/todoupdate/:id', (req, res) => {
+    var id = req.params.id;
+    console.log(req.body);
+})
+
+
+// Updating a todo
+// app.put('/todoupdate/:id', (req, res) => {
+//     var id = req.params.id;
+
+//     var newTodo = {
+//         text: req.body.text
+//     }
+//      console.log(req)
+// })
 
 
 
