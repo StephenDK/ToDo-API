@@ -1,5 +1,5 @@
 
-
+const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 // const mongoose = require('mongoose');
@@ -167,6 +167,36 @@ app.delete('/tododelete/:id', (req, res) => {
 app.patch('/todoupdate/:id', (req, res) => {
     var id = req.params.id;
     console.log(req.body);
+    // The lodash pick method takes in the req.body object and 
+    // makes an object from the specifid keys
+    var body = _.pick(req.body, ['text', 'completed']);
+    console.log(body.completed);
+
+    // Check the object id and see if its valid
+    if (!ObjectID.isValid(id)) {
+        return res.status(404).send();
+    }
+
+    if (_.isBoolean(body.completed) && body.completed) {
+        // Check if the body.completed is boolean and body.completed is true
+        // set the completedAt to a time stamp 
+        body.completedAt = new Date().getTime();
+    } else {
+        // set the completed and completedAt stamp to false and null
+        body.completed = false;
+        body.completedAt = null;
+    }
+
+    // Make a query to db to make an update
+    Todo.findByIdAndUpdate(id, {$set: body}, {new: true}).then((todo) => {
+        // check if todo object does not exist
+        if (!todo) {
+            return res.status(404).send();
+        }
+        res.send({todo});
+    }).catch((e) => {
+        res.status(400).send();
+    })
 })
 
 
