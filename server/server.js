@@ -223,10 +223,10 @@ app.listen(PORT, () => {
 
 module.exports = {app};
 
-// var newUser = new USER({
+// var newUser = {
 //     userName: 'Stephen Klein',
 //     email: 'stephen.klein08yahoo.com'
-// });
+// };
 
 // var newTudo = new Todo({
 //     text: 'Sky Dive'
