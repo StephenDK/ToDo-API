@@ -133,7 +133,7 @@ describe('DELETE /tododelete/:id', () => {
             .delete(`/tododelete/${hexId}`)
             .expect(200)
             .expect((res) => {
-                console.log(res.body._id);
+                // console.log(res.body._id);
                 expect(res.body.todo._id).toBe(hexId);
             })
             .end(done);

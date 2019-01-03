@@ -1,3 +1,5 @@
+require('./config/config');
+
 
 const _ = require('lodash');
 const express = require('express');
@@ -10,7 +12,7 @@ const {USER} = require('./models/user');
 
 
 var app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/public'));
